@@ -35,9 +35,11 @@ float get_distance(float voltage) {
     float dist = 0;
     if ( voltage > b ) {
         dist = a / (voltage - b);
-  }
+    }
+    // alternative formula: https://robojax.com/learn/arduino/?vid=robojax_SHARP_0A51SK_IR
+    // float dist = 33.9 + -69.5 * (voltage) + 62.3 * pow(voltage, 2) + -25.4 * pow(voltage, 3) + 3.83 * pow(voltage, 4);
 
-  return dist;
+    return dist;
 }
 
 void app_main() {
