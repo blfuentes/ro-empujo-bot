@@ -86,25 +86,30 @@ void app_main()
     i2c_driver_install(I2C_MASTER_NUM, conf.mode, 0, 0, 0);
 
     ssd1306_dev = ssd1306_create(I2C_MASTER_NUM, SSD1306_I2C_ADDRESS);
+
     ssd1306_refresh_gram(ssd1306_dev);
     ssd1306_clear_screen(ssd1306_dev, 0x00);
 
-    char data_str[10] = {0};
-    sprintf(data_str, "C STR");
-    ssd1306_draw_string(ssd1306_dev, 70, 16, (const uint8_t *)data_str, 16, 1);
+    char data_str[20] = {0};
+    sprintf(data_str, "STARTING!");
+    ssd1306_draw_string(ssd1306_dev, 0, 0, (const uint8_t *)data_str, 16, 1);
     ssd1306_refresh_gram(ssd1306_dev);
 
     while (1)
-    {
+    {   
         float adcValue = read_adc(adcChannel); // adc1_get_raw(ADC1_CHANNEL_6);
         float voltage = get_voltage(adcValue);
         float distance = get_distance(voltage);
         printf("Value: %f - voltage: %f - distance: %f\n", adcValue, voltage, distance);
 
-        sprintf(data_str, "C STR");
-        ssd1306_draw_string(ssd1306_dev, 70, 16, (const uint8_t *)data_str, 16, 1);
+        if (voltage > 0.5) {
+           sprintf(data_str, "%.2f cm", distance); 
+        } else {
+            sprintf(data_str, "Out of range");
+        }
+        ssd1306_clear_screen(ssd1306_dev, 0x00);
+        ssd1306_draw_string(ssd1306_dev, 0, 0, (const uint8_t *)data_str, 16, 1);
         ssd1306_refresh_gram(ssd1306_dev);
-
-        vTaskDelay(pdMS_TO_TICKS(1000));
+        vTaskDelay(pdMS_TO_TICKS(5));
     }
 }
