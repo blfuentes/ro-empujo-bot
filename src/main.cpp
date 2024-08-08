@@ -109,7 +109,11 @@ void app_main()
         }
         ssd1306_clear_screen(ssd1306_dev, 0x00);
         ssd1306_draw_string(ssd1306_dev, 0, 0, (const uint8_t *)data_str, 16, 1);
-        ssd1306_refresh_gram(ssd1306_dev);
+        esp_err_t error = ssd1306_refresh_gram(ssd1306_dev);
+        if (error != ESP_OK)
+        {
+            printf("Error: %d\n", error);
+        }
         vTaskDelay(pdMS_TO_TICKS(5));
     }
 }
