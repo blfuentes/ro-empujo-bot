@@ -18,8 +18,8 @@ constexpr float referenceVoltage = 5.0;                 // Reference voltage of 
 constexpr int adcMaxValue = 4096;                       // Maximum ADC value for a 12-bit ADC
 
 // OLED display
-constexpr int I2C_SDA = 7;
-constexpr int I2C_SCL = 6;
+constexpr int I2C_SDA = 18;
+constexpr int I2C_SCL = 17;
 
 #define I2C_MASTER_SCL_IO I2C_SCL /*!< gpio number for I2C master clock */
 #define I2C_MASTER_SDA_IO I2C_SDA /*!< gpio number for I2C master data  */
