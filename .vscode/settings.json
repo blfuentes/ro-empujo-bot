@@ -2,6 +2,10 @@
     "cmake.configureOnOpen": true,
     "files.associations": {
         "cmath": "cpp",
-        "string.h": "c"
+        "string.h": "c",
+        "esp_lcd_io_i2c.h": "c",
+        "i2c_master.h": "c",
+        "esp_lcd_panel_vendor.h": "c",
+        "*.bak": "c"
     }
 }
